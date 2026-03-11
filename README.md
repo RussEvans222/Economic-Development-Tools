@@ -30,12 +30,7 @@ Primary files:
 - `force-app/main/default/lwc/econDevHomeHeader/*`
 - `force-app/main/default/classes/EconDevHomeHeaderController.cls`
 
-Screenshots:
-
-![Command Center Dashboard](docs/screenshots/command-center-dashboard.png)
-![Funding Comparison Chart](docs/screenshots/funding-chart.png)
-
-If images do not appear yet, add files in `docs/screenshots/` using the expected names listed in `docs/screenshots/README.md`.
+Add additional screenshots in `docs/screenshots/` as needed.
 
 ## Quick Deploy
 
