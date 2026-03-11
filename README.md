@@ -1,74 +1,77 @@
-# Economic Development Demo Tools and Enhancements
+# Economic Development Demo Tools
 
-Salesforce DX project containing:
-- Economic development demo data loader (`EconDevDemoCloneService`)
-- Site map record component (`siteRecordMap`)
-- Home dashboard component (`econDevHomeHeader`)
+This repo contains Salesforce demo enhancements focused on visual storytelling for Economic Development use cases.
 
-## Prerequisites
+## Featured Assets
 
-- Salesforce CLI (`sf`) installed
-- Target org authorized (example alias: `econdev`)
+### Site Map Viewer (`siteRecordMap`)
+A Lightning Web Component for the `Site__c` record page that:
+- displays map pins using best-available coordinates
+- falls back through verified, geolocation, and base lat/long fields
+- shows address + coordinate context
+- includes optional debug output for troubleshooting
 
-## Deployable Assets
+Primary files:
+- `force-app/main/default/lwc/siteRecordMap/*`
+- `force-app/main/default/classes/SiteMapController.cls`
 
-- Deploy manifest: `manifest/package.xml`
-- Deploy script: `scripts/deploy-econdev-assets.sh`
+Screenshot:
 
-Deploy with:
+![Site Map Viewer](docs/screenshots/site-map-viewer.png)
+
+### Economic Development Command Center (`econDevHomeHeader`)
+A home-page dashboard style LWC that provides:
+- pipeline and operational KPI cards
+- quick action buttons for common admin and developer tasks
+- stage and funding status bar charts
+- funding program comparison chart (`Available Funds` vs `Total Awarded Funds`)
+
+Primary files:
+- `force-app/main/default/lwc/econDevHomeHeader/*`
+- `force-app/main/default/classes/EconDevHomeHeaderController.cls`
+
+Screenshots:
+
+![Command Center Dashboard](docs/screenshots/command-center-dashboard.png)
+![Funding Comparison Chart](docs/screenshots/funding-chart.png)
+
+If images do not appear yet, add files in `docs/screenshots/` using the expected names listed in `docs/screenshots/README.md`.
+
+## Quick Deploy
+
+Prerequisites:
+- Salesforce CLI (`sf`)
+- Authenticated org alias (example: `econdev`)
+
+One-click deploy from GitHub:
+
+<a href="https://githubsfdeploy.herokuapp.com?owner=RussEvans222&repo=Economic-Development-Tools&ref=main">
+  <img alt="Deploy to Salesforce"
+    src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
+</a>
+
+Deploy all featured metadata:
 
 ```bash
 ./scripts/deploy-econdev-assets.sh econdev
 ```
 
-## Run Demo Loader
+## Optional Demo Data Loader (Secondary)
+
+This repo also includes a one-time data loader utility (`EconDevDemoCloneService`) used for demo data seeding and idempotent reruns.
 
 Dry run:
-
 ```bash
 ./scripts/run-econdev-loader.sh econdev --dry-run
 ```
 
-Execute insert/clone run:
-
+Execute:
 ```bash
 ./scripts/run-econdev-loader.sh econdev
 ```
 
-## Validation Queries
-
-SOQL checks are in:
+Support files:
+- `scripts/apex/econdev_demo_clone_dry_run.apex`
+- `scripts/apex/econdev_demo_clone_run.apex`
 - `scripts/soql/econdev_demo_validation.soql`
-
-You can run ad-hoc with:
-
-```bash
-sf data query --target-org econdev --query "SELECT COUNT() FROM Opportunity WHERE analyticsdemo_batch_id__c LIKE 'ECONDEV_DEMO_OPP_%'"
-```
-
-## Cleanup Script
-
-Cleanup Apex script:
 - `scripts/apex/econdev_demo_cleanup.apex`
-
-Run with:
-
-```bash
-sf apex run --target-org econdev --file scripts/apex/econdev_demo_cleanup.apex
-```
-
-## Create A New GitHub Repo
-
-1. Initialize local repo:
-```bash
-git init
-git add .
-git commit -m "Initial economic development demo assets"
-```
-
-2. Create an empty GitHub repo (web UI), then connect:
-```bash
-git branch -M main
-git remote add origin <your-github-repo-url>
-git push -u origin main
-```
