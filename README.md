@@ -1,6 +1,6 @@
 # Economic Development Demo Tools
 
-This repo contains Salesforce demo enhancements focused on visual storytelling for Economic Development use cases.
+This repo contains Salesforce demo enhancements focused on visual storytelling for Economic Development use cases. This was Built off of a Trialforced Demo on the Internal Salesforce Toolset. The author of that demo is Andy S. These tools were used to enhance the demo, and modernize in a few areas. 
 
 ## Featured Assets
 
