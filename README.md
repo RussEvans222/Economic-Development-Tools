@@ -30,6 +30,10 @@ Primary files:
 - `force-app/main/default/lwc/econDevHomeHeader/*`
 - `force-app/main/default/classes/EconDevHomeHeaderController.cls`
 
+Screenshot:
+
+![Economic Development Command Center](docs/screenshots/command-center-dashboard.png)
+
 Add additional screenshots in `docs/screenshots/` as needed.
 
 ## Quick Deploy
