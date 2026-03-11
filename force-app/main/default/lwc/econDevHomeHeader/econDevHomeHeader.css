@@ -1,0 +1,216 @@
+:host {
+    display: block;
+}
+
+.hero {
+    border-radius: 0.85rem;
+    overflow: hidden;
+    border: 1px solid #d8dde6;
+    background:
+        radial-gradient(900px 240px at -8% -40%, rgba(255, 255, 255, 0.92), transparent 62%),
+        radial-gradient(820px 260px at 108% 120%, rgba(224, 240, 255, 0.52), transparent 55%),
+        linear-gradient(120deg, #fdfdfb 0%, #f8fbff 45%, #eef6ff 100%);
+}
+
+.hero__overlay {
+    padding: 1rem 1.1rem 1rem;
+}
+
+.hero__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+    align-items: flex-start;
+    margin-bottom: 0.85rem;
+}
+
+.eyebrow {
+    margin: 0;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #5f7285;
+    font-weight: 700;
+}
+
+.title {
+    margin: 0.1rem 0 0;
+    color: #1d2d44;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin: 0.35rem 0 0;
+    color: #4f6478;
+    font-size: 0.86rem;
+    line-height: 1.35;
+    max-width: 54rem;
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.65rem;
+    margin-bottom: 0.85rem;
+}
+
+.kpi-card {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(214, 223, 232, 0.9);
+    border-radius: 0.6rem;
+    padding: 0.6rem 0.7rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.kpi-label {
+    margin: 0;
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #355070;
+    font-weight: 700;
+}
+
+.kpi-value {
+    margin: 0.2rem 0 0;
+    color: #102a43;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.kpi-meta {
+    margin: 0.15rem 0 0;
+    font-size: 0.73rem;
+    color: #486581;
+}
+
+.quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 0.5rem;
+}
+
+.timestamp {
+    margin: 0;
+    color: #5f7285;
+    font-size: 0.72rem;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.7rem;
+    margin: 0.15rem 0 0.8rem;
+}
+
+.chart-card {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(214, 223, 232, 0.9);
+    border-radius: 0.6rem;
+    padding: 0.7rem 0.8rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.comparison-card {
+    grid-column: 1 / -1;
+}
+
+.chart-head {
+    margin-bottom: 0.45rem;
+}
+
+.chart-head h2 {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    color: #1d3557;
+    font-weight: 700;
+}
+
+.chart-head p {
+    margin: 0.15rem 0 0;
+    font-size: 0.74rem;
+    color: #5a6f86;
+}
+
+.chart-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.chart-row__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.2rem;
+}
+
+.chart-label {
+    font-size: 0.78rem;
+    color: #2f4858;
+    font-weight: 600;
+}
+
+.chart-values {
+    font-size: 0.72rem;
+    color: #486581;
+    white-space: nowrap;
+}
+
+.dot {
+    margin: 0 0.22rem;
+}
+
+.chart-track {
+    position: relative;
+    height: 0.52rem;
+    border-radius: 999px;
+    background: #eaf0f6;
+    overflow: hidden;
+}
+
+.chart-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 999px;
+}
+
+.stage-fill {
+    background: linear-gradient(90deg, #3a86ff 0%, #4dabf7 100%);
+}
+
+.funding-fill {
+    background: linear-gradient(90deg, #2a9d8f 0%, #52b69a 100%);
+}
+
+.comparison-total-fill {
+    background: linear-gradient(90deg, #1f6feb 0%, #4f8ff7 100%);
+}
+
+.comparison-awarded-fill {
+    background: linear-gradient(90deg, #1f9d78 0%, #4fc497 100%);
+}
+
+.error-box {
+    background: rgba(255, 236, 238, 0.95);
+    color: #8a1122;
+    border: 1px solid rgba(138, 17, 34, 0.2);
+    border-radius: 0.55rem;
+    padding: 0.65rem 0.75rem;
+}
+
+@media (max-width: 680px) {
+    .hero__top {
+        flex-direction: column;
+    }
+}

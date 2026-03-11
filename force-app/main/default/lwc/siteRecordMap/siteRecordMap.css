@@ -1,0 +1,96 @@
+:host {
+    display: block;
+}
+
+.shell {
+    padding: 0.75rem;
+    background: linear-gradient(180deg, #fdfdfb 0%, #f9fbfd 58%, #ffffff 100%);
+}
+
+.header-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #16325c;
+}
+
+.subtitle {
+    margin: 0.15rem 0 0;
+    font-size: 0.8125rem;
+    color: #3e3e3c;
+}
+
+.coords {
+    margin: 0.25rem 0 0;
+    font-size: 0.75rem;
+    color: #706e6b;
+    letter-spacing: 0.01em;
+}
+
+.status {
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.status-success {
+    color: #056764;
+    background: #dff3f3;
+}
+
+.status-error {
+    color: #8a1122;
+    background: #fde7ea;
+}
+
+.status-neutral {
+    color: #505050;
+    background: #ecebea;
+}
+
+.map-frame {
+    border: 1px solid #d8dde6;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #fefefe;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.map {
+    height: 20rem;
+}
+
+.message {
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    background: #f8f8f6;
+    color: #3e3e3c;
+    font-size: 0.8125rem;
+}
+
+.message-error {
+    background: #fde7ea;
+    color: #8a1122;
+}
+
+.debug {
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed #d8dde6;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: #54698d;
+}

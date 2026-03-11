@@ -1,0 +1,28 @@
+-- Cloned Opportunity count by marker
+SELECT COUNT() FROM Opportunity WHERE analyticsdemo_batch_id__c LIKE 'MANSFIELD_DEMO_OPP_%'
+
+-- Generated Opportunity stage coverage
+SELECT StageName, COUNT(Id)
+FROM Opportunity
+WHERE analyticsdemo_batch_id__c LIKE 'MANSFIELD_DEMO_OPP_GEN_%'
+GROUP BY StageName
+ORDER BY StageName
+
+-- Cloned Site records with Mansfield geography
+SELECT Id, Name, Street_Address__c, City__c, State__c, Postal_Zip_Code__c,
+       Latitude__c, Longitude__c, Site_Geolocation__Latitude__s, Site_Geolocation__Longitude__s
+FROM Site__c
+WHERE analyticsdemo_batch_id__c LIKE 'MANSFIELD_DEMO_SITE_%'
+  AND City__c = 'Mansfield'
+  AND State__c = 'Texas'
+
+-- Funding Program reference integrity on cloned funding requests
+SELECT COUNT() FROM outfunds__Funding_Request__c
+WHERE analyticsdemo_batch_id__c LIKE 'MANSFIELD_DEMO_FR_%'
+  AND outfunds__FundingProgram__c != null
+
+-- Task cloning marker check
+SELECT COUNT() FROM Task WHERE analyticsdemo_batch_id__c LIKE 'MANSFIELD_DEMO_TASK_%'
+
+-- Generated background checks (underwriting + sampled proposal)
+SELECT COUNT() FROM Background_Check__c WHERE analyticsdemo_batch_id__c LIKE 'MANSFIELD_DEMO_BG_GEN_%'

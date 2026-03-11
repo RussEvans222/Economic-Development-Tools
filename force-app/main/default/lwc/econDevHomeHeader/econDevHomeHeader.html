@@ -1,0 +1,155 @@
+<template>
+    <section class="hero">
+        <div class="hero__overlay">
+                <div class="hero__top">
+                    <div>
+                        <p class="eyebrow">Mansfield Econ Dev</p>
+                        <h1 class="title">Economic Development Command Center</h1>
+                        <p class="subtitle">At-a-glance pipeline, map readiness, and developer shortcuts for daily execution.</p>
+                    </div>
+                <div class="hero__actions">
+                    <lightning-button label="Refresh" variant="brand" icon-name="utility:refresh" onclick={handleRefresh}></lightning-button>
+                </div>
+            </div>
+
+            <template lwc:if={hasData}>
+                <!-- Developer note: KPI cards are intentionally compact for Home page above-the-fold visibility. -->
+                <div class="kpi-grid">
+                    <article class="kpi-card">
+                        <p class="kpi-label">Open Opportunities</p>
+                        <p class="kpi-value">{openOpportunityCount}</p>
+                        <p class="kpi-meta">Top Stage: {topOpenStage}</p>
+                    </article>
+                    <article class="kpi-card">
+                        <p class="kpi-label">Open Pipeline</p>
+                        <p class="kpi-value">
+                            <lightning-formatted-number value={openPipelineAmount} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                        </p>
+                        <p class="kpi-meta">All open deals</p>
+                    </article>
+                    <article class="kpi-card">
+                        <p class="kpi-label">Mansfield Sites</p>
+                        <p class="kpi-value">{mansfieldMappedSiteCount} / {mansfieldSiteCount}</p>
+                        <p class="kpi-meta">Map-ready / total</p>
+                    </article>
+                    <article class="kpi-card">
+                        <p class="kpi-label">Funding In Flight</p>
+                        <p class="kpi-value">{inFlightFundingRequestCount}</p>
+                        <p class="kpi-meta">
+                            <lightning-formatted-number value={inFlightFundingRequestedAmount} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                            requested
+                        </p>
+                    </article>
+                    <article class="kpi-card">
+                        <p class="kpi-label">Accepted Background Checks</p>
+                        <p class="kpi-value">{acceptedBackgroundCheckCount}</p>
+                        <p class="kpi-meta">Underwriting readiness</p>
+                    </article>
+                    <article class="kpi-card">
+                        <p class="kpi-label">Meetings Next 7 Days</p>
+                        <p class="kpi-value">{meetingsNext7Days}</p>
+                        <p class="kpi-meta">Calendar workload</p>
+                    </article>
+                </div>
+
+                <div class="quick-actions">
+                    <lightning-button label="New Opportunity" onclick={handleNewOpportunity}></lightning-button>
+                    <lightning-button label="New Site" onclick={handleNewSite}></lightning-button>
+                    <lightning-button label="Funding Requests" onclick={handleFundingRequests}></lightning-button>
+                    <lightning-button label="Mansfield Sites" onclick={handleMansfieldSites}></lightning-button>
+                    <lightning-button label="Site Object Setup" onclick={handleSetupSiteObject}></lightning-button>
+                    <lightning-button label="Apex Classes" onclick={handleSetupApexClasses}></lightning-button>
+                    <lightning-button label="Debug Logs" onclick={handleSetupDebugLogs}></lightning-button>
+                </div>
+
+                <!-- Developer note: Native bar charts (no static resource library required) for quick visual scanning. -->
+                <div class="charts-grid">
+                    <article class="chart-card comparison-card">
+                        <div class="chart-head">
+                            <h2>Available Funds vs Awarded Funds</h2>
+                            <p>Funding Program totals across all active program records</p>
+                        </div>
+                        <ul class="chart-list">
+                            <template for:each={fundingComparisonRows} for:item="row">
+                                <li key={row.label} class="chart-row">
+                                    <div class="chart-row__meta">
+                                        <span class="chart-label">{row.label}</span>
+                                        <span class="chart-values">
+                                            <lightning-formatted-number value={row.amount} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                                        </span>
+                                    </div>
+                                    <div class="chart-track">
+                                        <span class={row.fillClass} style={row.barStyle}></span>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </article>
+
+                    <article class="chart-card">
+                        <div class="chart-head">
+                            <h2>Open Pipeline by Stage</h2>
+                            <p>Count + amount for top open stages</p>
+                        </div>
+                        <template lwc:if={hasStageChartData}>
+                            <ul class="chart-list">
+                                <template for:each={stageChartRows} for:item="row">
+                                    <li key={row.label} class="chart-row">
+                                        <div class="chart-row__meta">
+                                            <span class="chart-label">{row.label}</span>
+                                            <span class="chart-values">
+                                                {row.count}
+                                                <span class="dot">•</span>
+                                                <lightning-formatted-number value={row.amount} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                                            </span>
+                                        </div>
+                                        <div class="chart-track">
+                                            <span class="chart-fill stage-fill" style={row.barStyle}></span>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                    </article>
+
+                    <article class="chart-card">
+                        <div class="chart-head">
+                            <h2>Funding Requests by Status</h2>
+                            <p>Current request mix and requested dollars</p>
+                        </div>
+                        <template lwc:if={hasFundingChartData}>
+                            <ul class="chart-list">
+                                <template for:each={fundingChartRows} for:item="row">
+                                    <li key={row.label} class="chart-row">
+                                        <div class="chart-row__meta">
+                                            <span class="chart-label">{row.label}</span>
+                                            <span class="chart-values">
+                                                {row.count}
+                                                <span class="dot">•</span>
+                                                <lightning-formatted-number value={row.amount} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                                            </span>
+                                        </div>
+                                        <div class="chart-track">
+                                            <span class="chart-fill funding-fill" style={row.barStyle}></span>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                    </article>
+                </div>
+
+                <p class="timestamp">
+                    Last refreshed:
+                    <lightning-formatted-date-time value={generatedAt} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+                </p>
+            </template>
+
+            <template lwc:elseif={hasError}>
+                <div class="error-box">
+                    Unable to load command center metrics. Check object permissions and try refresh.
+                </div>
+            </template>
+        </div>
+    </section>
+</template>

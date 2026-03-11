@@ -1,0 +1,39 @@
+<template>
+    <lightning-card icon-name="utility:world">
+        <div class="shell">
+            <div class="header-row">
+                <div>
+                    <h2 class="title">{mapTitle}</h2>
+                    <p class="subtitle">{locationLine}</p>
+                    <p class="coords">{coordinateLine}</p>
+                </div>
+                <span class={statusClass}>{statusLabel}</span>
+            </div>
+
+            <!-- Developer note: Render map only when a marker can be resolved. -->
+            <template lwc:if={hasMarker}>
+                <div class="map-frame">
+                    <lightning-map map-markers={mapMarkers} center={mapCenter} zoom-level="14" class="map"></lightning-map>
+                </div>
+            </template>
+
+            <template lwc:elseif={hasError}>
+                <div class="message message-error">Unable to load Site map data.</div>
+            </template>
+
+            <template lwc:else>
+                <template lwc:if={hasRecordContext}>
+                    <div class="message">No geographic location is available on this Site record yet.</div>
+                </template>
+                <template lwc:else>
+                    <div class="message message-error">Record context not detected. Place this component on a Site record page region.</div>
+                </template>
+            </template>
+
+            <template lwc:if={showDebug}>
+                <!-- Developer note: Optional diagnostics for troubleshooting context/data issues. -->
+                <div class="debug">{debugInfo}</div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
