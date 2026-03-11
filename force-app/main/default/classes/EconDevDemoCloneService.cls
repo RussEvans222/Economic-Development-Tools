@@ -1,6 +1,6 @@
-public with sharing class MansfieldDemoCloneService {
+public with sharing class EconDevDemoCloneService {
     // Developer note:
-    // One-time Mansfield demo data loader with idempotent markers to prevent duplicate clones.
+    // One-time Economic development demo data loader with idempotent markers to prevent duplicate clones.
     public class RunResult {
         public Boolean dryRun;
         public Boolean success;
@@ -12,7 +12,7 @@ public with sharing class MansfieldDemoCloneService {
         public Map<String, Integer> reusedByObject = new Map<String, Integer>();
     }
 
-    private static final String RUN_NAMESPACE = 'MANSFIELD_DEMO';
+    private static final String RUN_NAMESPACE = 'ECONDEV_DEMO';
     private static final String HIDDEN_MARKER_FIELD = 'analyticsdemo_batch_id__c';
     private static final Integer DML_CHUNK_SIZE = 200;
 
@@ -69,21 +69,21 @@ public with sharing class MansfieldDemoCloneService {
         'Educational', 'Hospitality'
     };
 
-    private static final List<AddressSeed> MANSFIELD_ADDRESSES = new List<AddressSeed>{
-        new AddressSeed('500 N Main St', 'Mansfield', 'Texas', '76063', 32.56380, -97.14120),
-        new AddressSeed('1110 S Main St', 'Mansfield', 'Texas', '76063', 32.54680, -97.13590),
-        new AddressSeed('1305 E Broad St', 'Mansfield', 'Texas', '76063', 32.56610, -97.11870),
-        new AddressSeed('601 E Debbie Ln', 'Mansfield', 'Texas', '76063', 32.59490, -97.13150),
-        new AddressSeed('1801 US 287 Frontage Rd', 'Mansfield', 'Texas', '76063', 32.58240, -97.10300),
-        new AddressSeed('900 N Walnut Creek Dr', 'Mansfield', 'Texas', '76063', 32.58730, -97.12480),
-        new AddressSeed('3200 E Broad St', 'Mansfield', 'Texas', '76063', 32.56810, -97.07150),
-        new AddressSeed('990 N Walnut Creek Dr', 'Mansfield', 'Texas', '76063', 32.58910, -97.12370),
-        new AddressSeed('2800 E Broad St', 'Mansfield', 'Texas', '76063', 32.56720, -97.08090),
-        new AddressSeed('2700 E Broad St', 'Mansfield', 'Texas', '76063', 32.56700, -97.08430),
-        new AddressSeed('2951 Matlock Rd', 'Mansfield', 'Texas', '76063', 32.57780, -97.11340),
-        new AddressSeed('700 Heritage Pkwy', 'Mansfield', 'Texas', '76063', 32.58270, -97.14690),
-        new AddressSeed('1200 N Holland Rd', 'Mansfield', 'Texas', '76063', 32.58650, -97.16120),
-        new AddressSeed('1701 E Broad St', 'Mansfield', 'Texas', '76063', 32.56600, -97.11340)
+    private static final List<AddressSeed> DEMO_ADDRESSES = new List<AddressSeed>{
+        new AddressSeed('500 N Main St', 'Demo City', 'Texas', '76063', 32.56380, -97.14120),
+        new AddressSeed('1110 S Main St', 'Demo City', 'Texas', '76063', 32.54680, -97.13590),
+        new AddressSeed('1305 E Broad St', 'Demo City', 'Texas', '76063', 32.56610, -97.11870),
+        new AddressSeed('601 E Debbie Ln', 'Demo City', 'Texas', '76063', 32.59490, -97.13150),
+        new AddressSeed('1801 US 287 Frontage Rd', 'Demo City', 'Texas', '76063', 32.58240, -97.10300),
+        new AddressSeed('900 N Walnut Creek Dr', 'Demo City', 'Texas', '76063', 32.58730, -97.12480),
+        new AddressSeed('3200 E Broad St', 'Demo City', 'Texas', '76063', 32.56810, -97.07150),
+        new AddressSeed('990 N Walnut Creek Dr', 'Demo City', 'Texas', '76063', 32.58910, -97.12370),
+        new AddressSeed('2800 E Broad St', 'Demo City', 'Texas', '76063', 32.56720, -97.08090),
+        new AddressSeed('2700 E Broad St', 'Demo City', 'Texas', '76063', 32.56700, -97.08430),
+        new AddressSeed('2951 Matlock Rd', 'Demo City', 'Texas', '76063', 32.57780, -97.11340),
+        new AddressSeed('700 Heritage Pkwy', 'Demo City', 'Texas', '76063', 32.58270, -97.14690),
+        new AddressSeed('1200 N Holland Rd', 'Demo City', 'Texas', '76063', 32.58650, -97.16120),
+        new AddressSeed('1701 E Broad St', 'Demo City', 'Texas', '76063', 32.56600, -97.11340)
     };
 
     public static RunResult run(Boolean dryRun) {
@@ -328,7 +328,7 @@ public with sharing class MansfieldDemoCloneService {
                     continue;
                 }
 
-                AddressSeed seed = MANSFIELD_ADDRESSES[Math.mod(i, MANSFIELD_ADDRESSES.size())];
+                AddressSeed seed = DEMO_ADDRESSES[Math.mod(i, DEMO_ADDRESSES.size())];
                 i++;
 
                 SObject rec = copyCreateableFields(objectApiName, src, null);
@@ -619,7 +619,7 @@ public with sharing class MansfieldDemoCloneService {
                 Boolean attachSite = !siteIds.isEmpty() && i < 10;
 
                 SObject opp = gd.get('Opportunity').newSObject();
-                opp.put('Name', 'Mansfield ' + sector + ' Expansion ' + leftPad(String.valueOf(i + 1), 2));
+                opp.put('Name', 'Economic Development ' + sector + ' Expansion ' + leftPad(String.valueOf(i + 1), 2));
                 opp.put('AccountId', accountId);
                 opp.put('StageName', stage);
                 opp.put('CloseDate', Date.today().addDays(30 + (i * 10)));

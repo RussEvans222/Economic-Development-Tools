@@ -3,7 +3,7 @@
     <apiVersion>66.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Econ Dev Home Header</masterLabel>
-    <description>Professional command header for Mansfield economic development operations and developer quick actions.</description>
+    <description>Professional command header for economic development operations and developer quick actions.</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>

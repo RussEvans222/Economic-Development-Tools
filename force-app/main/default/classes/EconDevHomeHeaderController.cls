@@ -12,8 +12,8 @@ public with sharing class EconDevHomeHeaderController {
         @AuraEnabled public Decimal openPipelineAmount;
         @AuraEnabled public String topOpenStage;
 
-        @AuraEnabled public Integer mansfieldSiteCount;
-        @AuraEnabled public Integer mansfieldMappedSiteCount;
+        @AuraEnabled public Integer siteCount;
+        @AuraEnabled public Integer mappedSiteCount;
 
         @AuraEnabled public Integer inFlightFundingRequestCount;
         @AuraEnabled public Decimal inFlightFundingRequestedAmount;
@@ -74,19 +74,16 @@ public with sharing class EconDevHomeHeaderController {
         }
 
         // Developer note:
-        // Site KPIs focus on map-ready Mansfield inventory.
-        snap.mansfieldSiteCount = [
+        // Site KPIs focus on overall map-ready inventory.
+        snap.siteCount = [
             SELECT COUNT()
             FROM Site__c
-            WHERE City__c = 'Mansfield' AND State__c = 'Texas'
         ];
 
-        snap.mansfieldMappedSiteCount = [
+        snap.mappedSiteCount = [
             SELECT COUNT()
             FROM Site__c
-            WHERE City__c = 'Mansfield'
-              AND State__c = 'Texas'
-              AND Latitude__c != null
+            WHERE Latitude__c != null
               AND Longitude__c != null
         ];
 

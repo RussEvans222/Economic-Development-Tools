@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Runs the one-time Mansfield demo loader Apex script.
+# Runs the one-time Economic development demo loader Apex script.
 # Usage:
-#   ./scripts/run-mansfield-loader.sh <target-org-alias> [--dry-run]
+#   ./scripts/run-econdev-loader.sh <target-org-alias> [--dry-run]
 
 set -euo pipefail
 
@@ -13,9 +13,9 @@ fi
 TARGET_ORG="$1"
 MODE="${2:-}"
 
-SCRIPT_PATH="scripts/apex/mansfield_demo_clone_run.apex"
+SCRIPT_PATH="scripts/apex/econdev_demo_clone_run.apex"
 if [[ "${MODE}" == "--dry-run" ]]; then
-  SCRIPT_PATH="scripts/apex/mansfield_demo_clone_dry_run.apex"
+  SCRIPT_PATH="scripts/apex/econdev_demo_clone_dry_run.apex"
 fi
 
 echo "==> Running loader script: ${SCRIPT_PATH} on ${TARGET_ORG}"

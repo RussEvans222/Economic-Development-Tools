@@ -38,12 +38,12 @@ export default class EconDevHomeHeader extends NavigationMixin(LightningElement)
         return this.snapshot?.topOpenStage ?? 'N/A';
     }
 
-    get mansfieldSiteCount() {
-        return this.snapshot?.mansfieldSiteCount ?? 0;
+    get siteCount() {
+        return this.snapshot?.siteCount ?? 0;
     }
 
-    get mansfieldMappedSiteCount() {
-        return this.snapshot?.mansfieldMappedSiteCount ?? 0;
+    get mappedSiteCount() {
+        return this.snapshot?.mappedSiteCount ?? 0;
     }
 
     get inFlightFundingRequestCount() {
@@ -159,7 +159,7 @@ export default class EconDevHomeHeader extends NavigationMixin(LightningElement)
         });
     }
 
-    handleMansfieldSites() {
+    handleSites() {
         this[NavigationMixin.Navigate]({
             type: 'standard__objectPage',
             attributes: { objectApiName: 'Site__c', actionName: 'list' },

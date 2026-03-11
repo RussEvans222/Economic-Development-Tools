@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Deploys the Mansfield demo metadata bundle in manifest/package.xml
+# Deploys the Economic development demo metadata bundle in manifest/package.xml
 # Usage:
-#   ./scripts/deploy-mansfield-assets.sh <target-org-alias>
+#   ./scripts/deploy-econdev-assets.sh <target-org-alias>
 
 set -euo pipefail
 
@@ -12,7 +12,7 @@ fi
 
 TARGET_ORG="$1"
 
-echo "==> Deploying Mansfield assets to org: ${TARGET_ORG}"
+echo "==> Deploying Economic development assets to org: ${TARGET_ORG}"
 sf project deploy start \
   --target-org "${TARGET_ORG}" \
   --manifest manifest/package.xml \
