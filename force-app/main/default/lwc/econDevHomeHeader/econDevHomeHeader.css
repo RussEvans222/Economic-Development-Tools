@@ -201,6 +201,10 @@
     background: linear-gradient(90deg, #1f9d78 0%, #4fc497 100%);
 }
 
+.negative-fill {
+    background: linear-gradient(90deg, #b42318 0%, #f97066 100%);
+}
+
 .error-box {
     background: rgba(255, 236, 238, 0.95);
     color: #8a1122;

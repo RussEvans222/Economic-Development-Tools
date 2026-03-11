@@ -116,14 +116,18 @@ export default class EconDevHomeHeader extends NavigationMixin(LightningElement)
     // Two-bar comparison for Funding Program available funds vs awarded funds.
     get fundingComparisonRows() {
         const rows = [
-            { label: 'Available Funds', amount: this.totalAvailableFundsAmount, fillClass: 'chart-fill comparison-total-fill' },
-            { label: 'Total Awarded Funds', amount: this.totalAwardedFundsAmount, fillClass: 'chart-fill comparison-awarded-fill' }
+            { label: 'Available Funds', amount: this.totalAvailableFundsAmount, baseFillClass: 'comparison-total-fill' },
+            { label: 'Total Awarded Funds', amount: this.totalAwardedFundsAmount, baseFillClass: 'comparison-awarded-fill' }
         ];
-        const max = rows.reduce((m, r) => Math.max(m, r.amount || 0), 0);
+        const maxAbs = rows.reduce((m, r) => Math.max(m, Math.abs(r.amount || 0)), 0);
         return rows.map((r) => {
-            const pct = max > 0 ? Math.max(8, Math.round(((r.amount || 0) / max) * 100)) : 0;
+            const absAmount = Math.abs(r.amount || 0);
+            const pct = maxAbs > 0 ? Math.max(8, Math.round((absAmount / maxAbs) * 100)) : 0;
+            const isNegative = (r.amount || 0) < 0;
             return {
-                ...r,
+                label: r.label,
+                amount: r.amount,
+                fillClass: `chart-fill ${r.baseFillClass}${isNegative ? ' negative-fill' : ''}`,
                 barStyle: `width:${pct}%;`
             };
         });
